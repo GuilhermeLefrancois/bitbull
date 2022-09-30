@@ -1,6 +1,6 @@
 import {NTRS} from './dom.js'
 
-var url = "http://127.0.0.1:8000/bitbull/"
+var url = "https://nasa-bitbull.herokuapp.com/bitbull/"
 
 const biuldRequest = function(method, endpoint, headers, body, loadStart, loadEnd, execute)
 {
