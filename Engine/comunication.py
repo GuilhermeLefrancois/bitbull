@@ -16,12 +16,11 @@ class Agent:
         self.method = method
         self.headers = headers
         self.body = body
-        print(queryparams)
         self.queryparams = Agent.biuldQueryParamsText(self, queryparams)
 
     def getURL(self):
         return self.host["url"] + self.endpoint + self.queryparams
-
+    
     def biuldQueryParamsText(self, params):
         ret = ""
         for param in params:
@@ -33,9 +32,9 @@ class Agent:
         return ret
 
     def sendRequest(self):
-        if(str(self.method).upper == "GET"):
-            requests.get(url=self.host.url).json()
-        if(str(self.method).upper == "POST"):
-            requests.post().json()
+        if(str(self.method).upper() == "GET"):
+            return requests.get(url=self.getURL()).json()
+        if(str(self.method).upper() == "POST"):
+            return requests.post().json()
 
 

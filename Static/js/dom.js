@@ -16,7 +16,17 @@ const setLoadingComponent = function(state)
 var NTRS = []
 const loadNTRS = function(data)
 {
-    console.log(data)
+    NTRS = JSON.parse(data)
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://ntrs.nasa.gov"+NTRS[0].downloads[0].links.pdf);
+    xhr.onreadystatechange = () =>
+    {
+        if(xhr.readyState === 4)
+        {
+            window.open(xhr.response)
+        }
+    }
+    xhr.send()
 }
 
 export {setEventDom, setValueDom, setLoadingComponent, loadNTRS, NTRS}

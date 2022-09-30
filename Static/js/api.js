@@ -1,6 +1,7 @@
 import {NTRS} from './dom.js'
 
-var url = "https://nasa-bitbull.herokuapp.com/bitbull/"
+//var url = "https://nasa-bitbull.herokuapp.com/bitbull/"
+var url = "http://127.0.0.1:5000/bitbull/"
 
 const biuldRequest = function(method, endpoint, headers, body, loadStart, loadEnd, execute)
 {
@@ -42,7 +43,7 @@ const biuldRequest = function(method, endpoint, headers, body, loadStart, loadEn
 
 const sendRequest = async function(request)
 {
-    request.send(JSON.stringify(await request.body))
+    request.send(JSON.stringify(request.body))
 }
 
 const ping = function()

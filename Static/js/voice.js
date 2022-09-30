@@ -5,17 +5,16 @@ if(window.SpeechRecognition || window.webkitSpeechRecognition)
 {
     var recognizer = new window.webkitSpeechRecognition();
     recognizer.continuous = true;
-    
+    var ret = "";
+
     recognizer.onresult = function(event)
     {
-        var ret = "";
         ret += " "+event.results[event.resultIndex][0].transcript;
-        console.log(ret)
         //console.log(event.results[event.resultIndex][0].transcript)
         //console.log(event.results[event.resultIndex][0].confidence)
         if(ret.indexOf("Shazam") > 0)
         {
-            let request = biuldRequest("POST", "teste", [], ret, ()=>setLoadingComponent(true), ()=>setLoadingComponent(false), ()=>loadNTRS(request.response))
+            let request = biuldRequest("POST", "search", [], ret, ()=>setLoadingComponent(true), ()=>setLoadingComponent(false), ()=>loadNTRS(request.response))
             sendRequest(request)
             recognizer.abort();
         }
@@ -32,6 +31,21 @@ if(window.SpeechRecognition || window.webkitSpeechRecognition)
             alert("error: " + ex.message);
         }
     });
+
+    document.onkeydown = (event) => 
+    {
+        if(event.code == "Enter")
+        {
+            try 
+            {
+                recognizer.start();
+            } 
+            catch (ex) 
+            {
+                alert("error: " + ex.message);
+            }
+        }
+      }
 }
 else
 {
