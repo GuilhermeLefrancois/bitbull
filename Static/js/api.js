@@ -1,7 +1,7 @@
 import {NTRS} from './dom.js'
 
-//var url = "https://nasa-bitbull.herokuapp.com/bitbull/"
-var url = "http://127.0.0.1:5000/bitbull/"
+var url = "https://nasa-bitbull.herokuapp.com/bitbull/"
+//var url = "http://127.0.0.1:5005/bitbull/"
 
 const biuldRequest = function(method, endpoint, headers, body, loadStart, loadEnd, execute)
 {

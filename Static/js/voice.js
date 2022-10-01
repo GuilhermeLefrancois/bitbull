@@ -5,13 +5,14 @@ if(window.SpeechRecognition || window.webkitSpeechRecognition)
 {
     var recognizer = new window.webkitSpeechRecognition();
     recognizer.continuous = true;
+    recognizer.lang = 'en-US';
     var ret = "";
 
     recognizer.onresult = function(event)
     {
         ret += " "+event.results[event.resultIndex][0].transcript;
-        //console.log(event.results[event.resultIndex][0].transcript)
-        //console.log(event.results[event.resultIndex][0].confidence)
+        console.log(event.results[event.resultIndex][0].transcript)
+        console.log(event.results[event.resultIndex][0].confidence)
         if(ret.indexOf("Shazam") > 0)
         {
             let request = biuldRequest("POST", "search", [], ret, ()=>setLoadingComponent(true), ()=>setLoadingComponent(false), ()=>loadNTRS(request.response))

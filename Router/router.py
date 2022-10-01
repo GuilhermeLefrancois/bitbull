@@ -24,14 +24,16 @@ async def pong():
         return "pong"
     except Exception as exp:
         return exp.args 
-#
+
 @router.post('/search')
 async def search(request: Request):
     body = await request.json()
-    request = com(host="nasa", endpoint="citations/search", method="GET", queryparams=[{"abstract":"Microheater"}])
+    print(body)
+    request = com(host="nasa", endpoint="citations/search", method="GET")
     return request.sendRequest()["results"]
 
+@router.get('/ntrs/{id}')
+async def search(request: Request, id):
+    requestb = com(host="nasa", endpoint="citations/"+id, method="GET")
+    return templates.TemplateResponse("NTRS.html", {"request": request, "data": requestb.sendRequest()})
 
-@router.get('/')
-async def searchQuery(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
