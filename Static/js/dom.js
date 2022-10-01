@@ -18,11 +18,12 @@ const setModalComponent = function(state)
     document.querySelector('#modalNTRS').style.display = state? "block" : "none";
 }
 
-const createElement = function(tag, value, click)
+const createElement = function(tag, value, click, css)
 {
     let element = document.createElement(tag)
     element.innerText = value
     element.onclick = click
+    element.className = css
     return element
 }
 
@@ -43,7 +44,7 @@ const loadNTRS = function(data)
         //tr.className = "table-active"
         tr.appendChild(createElement("td", item.id))
         tr.appendChild(createElement("td", item.title))
-        tr.appendChild(createElement("button", "Open", () => window.location.href="/bitbull/ntrs/"+item.id))
+        tr.appendChild(createElement("button", "Open", () => window.location.href="/bitbull/ntrs/"+item.id), "btn btn-primary")
         //tr.appendChild(createElement("td", item.center.name))
         //tr.appendChild(createElement("td", biuldDate(item.created)))
         //tr.appendChild(createElement("td", item.status))
@@ -60,6 +61,15 @@ const init = function()
     for(let ele of document.querySelectorAll('[data-bs-dismiss="modal"]'))
     {
         ele.addEventListener('click', () => setModalComponent(false));
+    }
+
+    for(let ele of document.querySelectorAll('[data-btn-action="openModal"]'))
+    {
+        ele.addEventListener('click', () => 
+        {
+            console.log(ele.getAttribute("data-download")[0])
+            document.getElementById(ele.getAttribute("modal-target")).style.display = "block"
+        });
     }
 }
 init()

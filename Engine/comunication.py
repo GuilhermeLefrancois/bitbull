@@ -35,6 +35,6 @@ class Agent:
         if(str(self.method).upper() == "GET"):
             return requests.get(url=self.getURL()).json()
         if(str(self.method).upper() == "POST"):
-            return requests.post().json()
+            return requests.post(url=self.getURL()).json()
 
 

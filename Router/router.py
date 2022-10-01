@@ -29,7 +29,7 @@ async def pong():
 async def search(request: Request):
     body = await request.json()
     print(body)
-    request = com(host="nasa", endpoint="citations/search", method="GET")
+    request = com(host="nasa", endpoint="citations/search", method="POST")
     return request.sendRequest()["results"]
 
 @router.get('/ntrs/{id}')

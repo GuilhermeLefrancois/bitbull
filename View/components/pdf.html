@@ -1,0 +1,15 @@
+{% macro pdf(data) %}
+<div style="display: none;" id="modalNTRS" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">NTRS: {{ data.title }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pdf-view">
+            <iframe src="https://ntrs.nasa.gov{{data.downloads[0].links.original}}" style="border: none;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

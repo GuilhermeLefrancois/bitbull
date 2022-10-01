@@ -1,40 +1,58 @@
 {% macro accordion(data) %}
-<div class="accordion" id="accordionExample">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Accordion Item #1
-        </button>
-      </h2>
-      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Accordion Item #2
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingThree">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Accordion Item #3
-        </button>
-      </h2>
-      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-        </div>
-      </div>
-    </div>
-  </div>
+<ul class="list-group  col-md-12">
+    <li class="list-group-item col-md-12 "><label class="label-result-data">Keywords</label> {{ ''.join(data.keywords)}}</li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">created</label> {{ data.created }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">distributionDate</label> {{ data.distributionDate }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">fundingNumbers</label>
+        {% for item in data.fundingNumbers %}
+            Number: {{ item.number }}
+            Type: {{ item.type }}
+            <br>
+        {% endfor %}
+    </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">title</label> {{ data.title }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">distribution</label> {{ data.distribution }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">stiType</label> {{ data.stiType }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">disseminated</label> {{ data.disseminated }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">authorAffiliations</label>
+        {% for item in data.authorAffiliations %}
+            Author: {{ item.meta.author.name }}
+            Organization: {{ item.meta.organization.name}}
+            <br>
+        {% endfor %}
+    </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">stiTypeDetails</label> {{ data.stiTypeDetails }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">modified</label> {{ data.modified }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">id</label> {{ data.id }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">sourceIdentifiers</label> 
+        {% for item in data.sourceIdentifiers %}
+            Number: {{ item.number}}
+            <br>
+        {% endfor %}
+    </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">publications</label> 
+        {% for item in data.publications %}
+            doi: {{ item.doi}}
+            eissn: {{ item.eissn}}
+            issn: {{ item.issn}}
+            issue: {{ item.issue}}
+            issuePublicationDate: {{ item.issuePublicationDate}}
+            pages: {{ item.pages}}
+            publicationDate: {{ item.publicationDate}}
+            publicationName: {{ item.publicationName}}
+            publisher: {{ item.publisher}}
+            volume: {{ item.volume}}
+            <br>
+        {% endfor %}
+    </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">status</label> {{ data.status }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">related</label> 
+        {% for item in data.related %}
+            doi: {{ item.doi}}
+            Item: {{ item }}
+            <br>
+        {% endfor %}
+    </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">index</label> {{ data.index }} </li>
+</ul>
 {% endmacro %}
