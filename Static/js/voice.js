@@ -15,7 +15,7 @@ if(window.SpeechRecognition || window.webkitSpeechRecognition)
         console.log(event.results[event.resultIndex][0].confidence)
         if(ret.indexOf("Shazam") > 0)
         {
-            let request = biuldRequest("POST", "search", [], ret, ()=>setLoadingComponent(true), ()=>setLoadingComponent(false), ()=>loadNTRS(request.response))
+            let request = biuldRequest("POST", "search", [], ret, ()=>{setLoadingComponent(true); let btn = document.querySelector("#btn-start-record"); btn.style.backgroundColor = "#0d6efd"; document.querySelector(".spinner-grow").remove()}, ()=>setLoadingComponent(false), ()=>loadNTRS(request.response))
             sendRequest(request)
             recognizer.abort();
         }
@@ -23,14 +23,9 @@ if(window.SpeechRecognition || window.webkitSpeechRecognition)
 
     document.querySelector("#btn-start-record").addEventListener("click", function() 
     {
-        try 
-        {
-            recognizer.start();
-        } 
-        catch (ex) 
-        {
-            alert("error: " + ex.message);
-        }
+        this.style.backgroundColor = "red"
+        this.innerHTML += ' <div class="spinner-grow" role="status"><span class="visually-hidden"> Loading...</span></div>'
+        recognizer.start();
     });
 
     document.onkeydown = (event) => 
@@ -39,6 +34,8 @@ if(window.SpeechRecognition || window.webkitSpeechRecognition)
         {
             try 
             {
+                this.style.backgroundColor = "red"
+                this.setAttribute("disabled", true)
                 recognizer.start();
             } 
             catch (ex) 

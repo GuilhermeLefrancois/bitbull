@@ -1,58 +1,69 @@
 {% macro accordion(data) %}
 <ul class="list-group  col-md-12">
+    <li class="list-group-item col-md-12"><label class="label-result-data">ID</label> {{ data.id }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">Title</label> {{ data.title.replace("<br>", "") }} </li>
     <li class="list-group-item col-md-12 "><label class="label-result-data">Keywords</label> {{ ''.join(data.keywords)}}</li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">created</label> {{ data.created }} </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">distributionDate</label> {{ data.distributionDate }} </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">fundingNumbers</label>
+    <li class="list-group-item col-md-12"><label class="label-result-data">Created</label> {{ data.created }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">Distribution Date</label> {{ data.distributionDate }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">Funding Numbers</label>
         {% for item in data.fundingNumbers %}
             Number: {{ item.number }}
             Type: {{ item.type }}
             <br>
         {% endfor %}
     </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">title</label> {{ data.title }} </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">distribution</label> {{ data.distribution }} </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">stiType</label> {{ data.stiType }} </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">disseminated</label> {{ data.disseminated }} </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">authorAffiliations</label>
+    
+    <li class="list-group-item col-md-12"><label class="label-result-data">Distribution</label> {{ data.distribution }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">S.T.I Type</label> {{ data.stiType }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">Disseminated</label> {{ data.disseminated }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">Author Affiliations</label>
         {% for item in data.authorAffiliations %}
             Author: {{ item.meta.author.name }}
             Organization: {{ item.meta.organization.name}}
             <br>
         {% endfor %}
     </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">stiTypeDetails</label> {{ data.stiTypeDetails }} </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">modified</label> {{ data.modified }} </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">id</label> {{ data.id }} </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">sourceIdentifiers</label> 
+    <li class="list-group-item col-md-12"><label class="label-result-data">S.T.I Type Details</label> {{ data.stiTypeDetails }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">Modified</label> {{ data.modified }} </li>
+    
+    <li class="list-group-item col-md-12"><label class="label-result-data">Source Identifiers</label> 
         {% for item in data.sourceIdentifiers %}
             Number: {{ item.number}}
             <br>
         {% endfor %}
     </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">publications</label> 
+    <li class="list-group-item col-md-12"><label class="label-result-data">Publications</label> 
         {% for item in data.publications %}
-            doi: {{ item.doi}}
-            eissn: {{ item.eissn}}
-            issn: {{ item.issn}}
-            issue: {{ item.issue}}
-            issuePublicationDate: {{ item.issuePublicationDate}}
-            pages: {{ item.pages}}
-            publicationDate: {{ item.publicationDate}}
-            publicationName: {{ item.publicationName}}
-            publisher: {{ item.publisher}}
-            volume: {{ item.volume}}
+            DOI: {{ item.doi}}
             <br>
+            EISSN: {{ item.eissn}}
+            <br>
+            ISSN: {{ item.issn}}
+            <br>
+            ISSUE: {{ item.issue}}
+            <br>
+            ISSU PUBLICATION DATE: {{ item.issuePublicationDate}}
+            <br>
+            PAGES: {{ item.pages}}
+            <br>
+            PUBLICATION DATE: {{ item.publicationDate}}
+            <br>
+            PUBLICATION NAME: {{ item.publicationName}}
+            <br>
+            PUBLISHER: {{ item.publisher}}
+            <br>
+            VOLUME: {{ item.volume}}
+            <hr>
         {% endfor %}
     </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">status</label> {{ data.status }} </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">related</label> 
+    <li class="list-group-item col-md-12"><label class="label-result-data">Status</label> {{ data.status }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">Related</label> 
         {% for item in data.related %}
             doi: {{ item.doi}}
             Item: {{ item }}
             <br>
         {% endfor %}
     </li>
-    <li class="list-group-item col-md-12"><label class="label-result-data">index</label> {{ data.index }} </li>
+    <li class="list-group-item col-md-12"><label class="label-result-data">Index</label> {{ data.index }} </li>
 </ul>
 {% endmacro %}

@@ -1,3 +1,5 @@
+import {biuldRequest, sendRequest, ping} from './api.js'
+
 const setEventDom = function(id, nameEvent, execute)
 {
     document.querySelector(id).addEventListener(nameEvent, execute);
@@ -23,7 +25,11 @@ const createElement = function(tag, value, click, css)
     let element = document.createElement(tag)
     element.innerText = value
     element.onclick = click
-    element.className = css
+    for (let classe of css)
+    {
+        element.classList.add(classe)
+    }
+    
     return element
 }
 
@@ -33,26 +39,28 @@ const biuldDate = function(value)
     return date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear()
 } 
 
-
 var NTRS = []
 const loadNTRS = function(data)
 {
+    console.log(JSON.parse(data))
+    
     let table = document.querySelector("#tableNTRS tbody")
     for(let item of JSON.parse(data))
     {
         let tr = document.createElement("tr")
-        //tr.className = "table-active"
-        tr.appendChild(createElement("td", item.id))
-        tr.appendChild(createElement("td", item.title))
-        tr.appendChild(createElement("button", "Open", () => window.location.href="/bitbull/ntrs/"+item.id), "btn btn-primary")
-        //tr.appendChild(createElement("td", item.center.name))
-        //tr.appendChild(createElement("td", biuldDate(item.created)))
-        //tr.appendChild(createElement("td", item.status))
-        //tr.appendChild(createElement("td", item.stiType))
-
+        tr.onclick = () => {window.open("/bitbull/ntrs/"+item.id, "_blank")}
+        tr.appendChild(createElement("td", item.id, ()=>{}, ["table-ntrs-text"]))
+        tr.appendChild(createElement("td", item.title, ()=>{}, ["table-ntrs-text"]))
+        //tr.appendChild(createElement("button", "OPEN", () => window.open("/bitbull/ntrs/"+item.id, "_blank"), ["btn-table"]))
         table.appendChild(tr)
-        console.log(item)
+        
     }
+    
+    for(let ele of document.getElementsByTagName("br"))
+    {
+        ele.remove()
+    }
+
     setModalComponent(true)
 }
 
@@ -67,9 +75,14 @@ const init = function()
     {
         ele.addEventListener('click', () => 
         {
-            console.log(ele.getAttribute("data-download")[0])
-            document.getElementById(ele.getAttribute("modal-target")).style.display = "block"
+            window.open("https://ntrs.nasa.gov/"+ele.getAttribute("data-download"),"_blank")
         });
+    }
+
+    document.getElementById("btn-search").onclick=()=>
+    {
+        let request = biuldRequest("POST", "search", [], document.getElementById("text-search").value, ()=>setLoadingComponent(true), ()=>setLoadingComponent(false), ()=>loadNTRS(request.response))
+        sendRequest(request)
     }
 }
 init()

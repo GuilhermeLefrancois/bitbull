@@ -16,10 +16,12 @@ class Agent:
         self.method = method
         self.headers = headers
         self.body = body
+        print(queryparams)
         self.queryparams = Agent.biuldQueryParamsText(self, queryparams)
 
     def getURL(self):
-        return self.host["url"] + self.endpoint + self.queryparams
+        print(str(self.host["url"]) + str(self.endpoint) + str(self.queryparams))
+        return str(self.host["url"]) + str(self.endpoint) + str(self.queryparams)
     
     def biuldQueryParamsText(self, params):
         ret = ""

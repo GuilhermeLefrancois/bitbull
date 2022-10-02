@@ -18,6 +18,7 @@ def root(request: Request):
 _router.include_router(router, prefix='/bitbull', tags=["BITBULL - API"])
 app.include_router(_router)
 
+
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=5007, log_level='info', reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=5016, log_level='info', reload=True)

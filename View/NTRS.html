@@ -16,7 +16,7 @@
             {{ accordion(data) }}
             <div class="container col-md-12">
                 {% if data.downloadsAvailable %}
-                    <button data-btn-action="openModal" data-download="{{data.downloads}}" modal-target="modalNTRS" type="button" class="btn btn-primary col-md-2">Download</button>
+                    <button data-btn-action="openModal" data-download="{{ data.downloads[0].links.original }}" modal-target="modalNTRS" type="button" class="btn btn-primary col-md-2">Download</button>
                 {% endif %}
                 <button type="button" class="btn btn-primary col-md-1">Resumo</button>
                 <button type="button" class="btn btn-primary col-md-2">Relatório</button>

@@ -9,11 +9,18 @@
         <link rel="stylesheet" href="{{ url_for('static', path='/css/main.css') }}">
     </head>
     <body>
-        <div class="position-absolute top-50 start-50 translate-middle">
-            <h1 style="color: beige; display: none;" id="loading">Carregando</h1>
+        <div class="position-absolute top-50 start-50 translate-middle col-md-8">
             <div class="d-grid gap-1">
-                <button id="btn-start-record" class="btn btn-primary" type="button">Inciar Pesquisa</button>
-              </div>
+                <img style="width: 200px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/2449px-NASA_logo.svg.png" class="rounded mx-auto d-block" alt="Nasa's logo">
+                <div class="input-group mb-3 mt-3">
+                    <input id="text-search" placeholder="Enter your search text" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <button id="btn-search" class="btn btn-primary" type="button">Search</button>
+                </div>
+                <button id="btn-start-record" class="btn btn-primary" type="button">Start Search Voice</button>
+                <img style="width: 80px; display: none;" class="rounded mx-auto mt-3" id="loading" src="https://i.gifer.com/origin/b4/b4d657e7ef262b88eb5f7ac021edda87.gif">
+            </div>
+              
+
         </div>
 
         
