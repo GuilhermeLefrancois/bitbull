@@ -19,24 +19,40 @@ if(window.SpeechRecognition || window.webkitSpeechRecognition)
             sendRequest(request)
             recognizer.abort();
         }
+        if(ret.toUpperCase().indexOf("ABORT") > 0)
+        {
+            let btn = document.querySelector("#btn-start-record"); 
+            btn.style.backgroundColor = "#0d6efd"; 
+            document.querySelector(".spinner-grow").remove()
+            //document.getElementById("btn-start-record").setAttribute("disabled", false)
+            recognizer.abort();
+        }
     }
 
-    document.querySelector("#btn-start-record").addEventListener("click", function() 
+    document.querySelector("#btn-start-record").addEventListener("click", async function() 
     {
         this.style.backgroundColor = "red"
-        this.innerHTML += ' <div class="spinner-grow" role="status"><span class="visually-hidden"> Loading...</span></div>'
+        document.getElementById("btn-start-record").innerHTML += ' <div class="spinner-grow" role="status"><span class="visually-hidden"> Loading...</span></div>'
+        //document.getElementById("btn-start-record").setAttribute("disabled", true)
         recognizer.start();
+        document.getElementById("alert-info-index").style.display = "flex"
+        await new Promise(r => setTimeout(r, 4000));
+        document.getElementById("alert-info-index").style.display = "none"
     });
 
-    document.onkeydown = (event) => 
+    document.onkeydown = async function(event) 
     {
         if(event.code == "Enter")
         {
             try 
             {
-                this.style.backgroundColor = "red"
-                this.setAttribute("disabled", true)
+                document.getElementById("btn-start-record").style.backgroundColor = "red"
+                document.getElementById("btn-start-record").innerHTML += ' <div class="spinner-grow" role="status"><span class="visually-hidden"> Loading...</span></div>'
+                //document.getElementById("btn-start-record").setAttribute("disabled", true)
                 recognizer.start();
+                document.getElementById("alert-info-index").style.display = "flex"
+                await new Promise(r => setTimeout(r, 10000));
+                document.getElementById("alert-info-index").style.display = "none"
             } 
             catch (ex) 
             {
