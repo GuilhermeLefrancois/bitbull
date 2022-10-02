@@ -13,7 +13,7 @@ if(window.SpeechRecognition || window.webkitSpeechRecognition)
         ret += " "+event.results[event.resultIndex][0].transcript;
         console.log(event.results[event.resultIndex][0].transcript)
         console.log(event.results[event.resultIndex][0].confidence)
-        if(ret.indexOf("Shazam") > 0)
+        if(ret.toUpperCase().indexOf("FIND") > 0)
         {
             let request = biuldRequest("POST", "search", [], ret, ()=>{setLoadingComponent(true); let btn = document.querySelector("#btn-start-record"); btn.style.backgroundColor = "#0d6efd"; document.querySelector(".spinner-grow").remove()}, ()=>setLoadingComponent(false), ()=>loadNTRS(request.response))
             sendRequest(request)
